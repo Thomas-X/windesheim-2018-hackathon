@@ -1,7 +1,52 @@
-POST /login
-GET /api/getTutorial?token={WHATEVER_TOKEN}
-GET /api/getQuestions?token={WHATEVER_TOKEN}
-GET /api/getScore?token={WHATEVER_TOKEN}
+-- Api (keys die bij bepaalde endpoints verwacht worden van de frontend) --
 
+- POST /api/createTeam
 
+request body:
+{}
+response body:
+{
+    code: 'abcdef1234'
+}
 
+- POST /api/addUserToTeam
+
+request body:
+{
+    name: 'Thomas',
+    code: 'abcdef1234'
+}
+response body:
+200 OK
+
+- POST /api/getAllQuestions
+request body:
+{
+    code: 'abcdef1234'
+}
+
+response body:
+{
+    code: 'abcdef1234',
+    questions: [
+        {
+            answers: ['Wortel', 'Steen', 'Aardappel', 'Appel'],
+            correctAnswer: ['Wortel'],
+            // als er een image is, dan is er een 'image' key
+            image: 'https://placekitten.com/640/380',
+            // als het alleen een text vraag is, dan is er een 'text' key
+            text: 'Je ziet een trap en de Utopolis, wat zie je nog meer?'
+        }
+        // ... etc, voor elke vraag dit
+    ]
+}
+
+-- Flow --
+
+[Je komt op de website] -> [Twee opties: maak een team aan, teamcode invoeren]
+
+optie 1
+[maak een team aan] -> [POST /api/createTeam] -> [Link wordt gedisplayed, voorbeeld code: abcdef1234]
+
+optie 2
+[teamcode invoeren] -> [voer code in van gemaakte team] -> [voer een naam in, bijv. Thomas] -> [POST /api/addUserToTeam] -> [tutorial view] -> [POST /api/getAllQuestions] -> [quiz]
