@@ -1,0 +1,7 @@
+POST /login
+GET /api/getTutorial?token={WHATEVER_TOKEN}
+GET /api/getQuestions?token={WHATEVER_TOKEN}
+GET /api/getScore?token={WHATEVER_TOKEN}
+
+
+
